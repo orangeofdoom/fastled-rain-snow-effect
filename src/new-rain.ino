@@ -1,0 +1,26 @@
+#include "FastLED.h"           	// This sketch uses the FastLED library
+
+#define DATA_PIN 6    		   	// Data connected to Digital Pin 2 on the Arduino
+
+#define LED_TYPE WS2811      	// This LED strip uses the WS2801 chipset.
+#define NUM_LEDS 40
+
+CRGB leds[NUM_LEDS];
+
+void setup() {
+	// sanity check delay - allows reprogramming if accidently blowing power w/leds
+   	delay(2000);
+    LEDS.addLeds<LED_TYPE, DATA_PIN, RGB>(leds, NUM_LEDS);
+}
+
+void loop() {
+   // Move a single white led
+   for(int Row1 = 0; Row1 < 8; Row1 = Row1 + 1) for(int row2 = 8; row2 <16; row2 = row2 +1) {
+       leds[Row1] = CRGB::White; leds[row2] = CRGB :: White; FastLED.show();
+      delay(100);
+    leds[Row1] = CRGB ::Black;
+    leds[row2] = CRGB ::Black;
+
+      FastLED.show();
+}
+}
